@@ -1,0 +1,18 @@
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Generated scan reports
+reports/
+
+# Editor-specific settings
+.vscode/
+
+# Local environment variables
+.env
+.env.*

@@ -1,0 +1,160 @@
+{
+    "schema_version": "1.0",
+    "tool": "VulnScope",
+    "generated_at": "2026-10-28T12:00:00+00:00",
+    "target": "127.0.0.1",
+    "observations": [
+        {
+            "scan": {
+                "target": "127.0.0.1",
+                "port": 8000,
+                "protocol": "TCP",
+                "status": "OPEN",
+                "response_time_ms": 1.24
+            },
+            "service": {
+                "service": "Alternative HTTP",
+                "confidence": "LOW",
+                "method": "PORT_MAPPING"
+            },
+            "findings": [
+                {
+                    "id": "PORT-8000",
+                    "type": "POTENTIAL_RISK",
+                    "severity": "INFO",
+                    "description": "Possible HTTP service requires inspection",
+                    "recommendation": "Inspect HTTP headers and TLS usage.",
+                    "confidence": "LOW",
+                    "confirmed_vulnerability": false
+                }
+            ]
+        },
+        {
+            "check": "http_headers",
+            "result": {
+                "target": "127.0.0.1",
+                "port": 8000,
+                "check": "http_headers",
+                "status": "COMPLETED",
+                "http_status": 200,
+                "headers": {
+                    "content-type": "text/html"
+                },
+                "findings": [
+                    {
+                        "id": "MISSING-CONTENT-SECURITY-POLICY",
+                        "type": "MISSING_SECURITY_HEADER",
+                        "header": "Content-Security-Policy",
+                        "severity": "REVIEW",
+                        "description": "Content-Security-Policy header is absent",
+                        "recommendation": "Consider an appropriate policy to restrict the resources browsers may load.",
+                        "confirmed_vulnerability": false
+                    },
+                    {
+                        "id": "MISSING-X-CONTENT-TYPE-OPTIONS",
+                        "type": "MISSING_SECURITY_HEADER",
+                        "header": "X-Content-Type-Options",
+                        "severity": "REVIEW",
+                        "description": "X-Content-Type-Options header is absent",
+                        "recommendation": "Consider setting this header to 'nosniff'.",
+                        "confirmed_vulnerability": false
+                    },
+                    {
+                        "id": "MISSING-REFERRER-POLICY",
+                        "type": "MISSING_SECURITY_HEADER",
+                        "header": "Referrer-Policy",
+                        "severity": "REVIEW",
+                        "description": "Referrer-Policy header is absent",
+                        "recommendation": "Consider a policy such as 'strict-origin-when-cross-origin'.",
+                        "confirmed_vulnerability": false
+                    }
+                ]
+            }
+        }
+    ],
+    "findings": [
+        {
+            "id": "PORT-8000",
+            "type": "POTENTIAL_RISK",
+            "severity": "INFO",
+            "description": "Possible HTTP service requires inspection",
+            "recommendation": "Inspect HTTP headers and TLS usage.",
+            "confidence": "LOW",
+            "confirmed_vulnerability": false
+        },
+        {
+            "id": "MISSING-CONTENT-SECURITY-POLICY",
+            "type": "MISSING_SECURITY_HEADER",
+            "header": "Content-Security-Policy",
+            "severity": "REVIEW",
+            "description": "Content-Security-Policy header is absent",
+            "recommendation": "Consider an appropriate policy to restrict the resources browsers may load.",
+            "confirmed_vulnerability": false
+        },
+        {
+            "id": "MISSING-X-CONTENT-TYPE-OPTIONS",
+            "type": "MISSING_SECURITY_HEADER",
+            "header": "X-Content-Type-Options",
+            "severity": "REVIEW",
+            "description": "X-Content-Type-Options header is absent",
+            "recommendation": "Consider setting this header to 'nosniff'.",
+            "confirmed_vulnerability": false
+        },
+        {
+            "id": "MISSING-REFERRER-POLICY",
+            "type": "MISSING_SECURITY_HEADER",
+            "header": "Referrer-Policy",
+            "severity": "REVIEW",
+            "description": "Referrer-Policy header is absent",
+            "recommendation": "Consider a policy such as 'strict-origin-when-cross-origin'.",
+            "confirmed_vulnerability": false
+        }
+    ],
+    "agent_decisions": [
+        {
+            "port": 8000,
+            "decision": "REQUEST_HTTP_CHECK",
+            "reason": "Open port commonly associated with HTTP"
+        },
+        {
+            "port": 8000,
+            "decision": "HTTP_CHECK_RESULT",
+            "reason": "HTTP execution returned a result",
+            "outcome": "COMPLETED"
+        },
+        {
+            "port": 22,
+            "decision": "SKIP",
+            "reason": "Port outside authorised scope"
+        }
+    ],
+    "policy_audit_log": [
+        {
+            "target": "127.0.0.1",
+            "port": 8000,
+            "action": "tcp_connect",
+            "permitted": true,
+            "reason": "Authorised"
+        },
+        {
+            "target": "127.0.0.1",
+            "port": 8000,
+            "action": "http_headers",
+            "permitted": true,
+            "reason": "Authorised"
+        },
+        {
+            "target": "127.0.0.1",
+            "port": 22,
+            "action": "tcp_connect",
+            "permitted": false,
+            "reason": "Port outside authorised scope"
+        }
+    ],
+    "summary": {
+        "observations": 2,
+        "findings": 4,
+        "approved_actions": 2,
+        "denied_actions": 1
+    }
+}
