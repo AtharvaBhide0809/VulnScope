@@ -24,14 +24,14 @@ The agent proposes actions, while ScopePolicy determines whether they are author
 
 The components and their responsibilities are listed below:
 
-**agent/controller.py**  Selects follow-up actions and records reasoning.
-**security/policy.py**  Defines and validates the authorised scope.
-**security/executor.py**  Enforces policy, manages sessions and dispatches approved actions.
-**scanner/**  Implements TCP connections and HTTP header checks.
-**analysis/**  Suggests services and preliminary risks.
-**reporting/**  Builds and saves JSON reports.
-**tests/**  Checks behaviour, denials, session limits and integration.
-**main.py / demo.py**  Runs the scanner / demonstrates security boundaries.
+- **agent/controller.py**  Selects follow-up actions and records reasoning.
+- **security/policy.py**  Defines and validates the authorised scope.
+- **security/executor.py**  Enforces policy, manages sessions and dispatches approved actions.
+- **scanner/**  Implements TCP connections and HTTP header checks.
+- **analysis/**  Suggests services and preliminary risks.
+- **reporting/**  Builds and saves JSON reports.
+- **tests/**  Checks behaviour, denials, session limits and integration.
+- **main.py / demo.py**  Runs the scanner / demonstrates security boundaries.
 
 **Workflow:** agent → policy-controlled executor → scanning tool → analysis → JSON report. The executor keeps session-wide limits and logs, while reports contain run-specific audit events.
 
